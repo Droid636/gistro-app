@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <h2>Formulario de Registro</h2>
+    <form id="registerForm" enctype="multipart/form-data">
+        <label>Texto:</label>
+        <input type="text" name="text_field" required><br><br>
+
+        <label>Contraseña:</label>
+        <input type="password" name="password" required><br><br>
+
+        <label>Imagen:</label>
+        <input type="file" name="image"><br><br>
+
+        <label>Fecha:</label>
+        <input type="date" name="date_field" required><br><br>
+
+        <label>Opinión:</label>
+        <textarea name="opinion"></textarea><br><br>
+
+        <label>Base de datos:</label>
+        <select name="database">
+            <option value="mysql">MySQL</option>
+            <option value="mongodb">MongoDB</option>
+        </select><br><br>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            const response = await fetch("/register", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        });
+    </script>
+</body>
+</html>
